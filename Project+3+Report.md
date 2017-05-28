@@ -30,8 +30,6 @@ I have recently relocated to Austin, TX. This project will help me get to know t
         - E.g., *"Texas Ash Cv"* versus *"Trillium Cove"*
     - Some street types are ommitted entirely:
         - E.g., *"Capri"* versus *"Capri Street"*
-<br>
-<br>
 - I addressed the inconsistent abbreviations by:
     - creating a list of common abbreviations and the particular abbreviations present in my sample file;
     - creating a mapping from the abbreviations to the words they abbreviate-- e.g., "cv" --> "Cove"; and
@@ -187,16 +185,17 @@ sqlite> SELECT COUNT(DISTINCT(b.uid))
 ```
 
 **Top ten contributors and number of contributions**:
-    1. patisilva_atxbuildings: 2741983
-    2. ccjjmartin_atxbuildings: 1300396
-    3. ccjjmartin__atxbuildings: 939996
-    4. wilsaj_atxbuildings: 358749
-    5. jseppi_atxbuildings: 300796
-    6. woodpeck_fixbot: 220495
-    7. kkt_atxbuildings: 157843
-    8. lyzidiamond_atxbuildings: 156355
-    9. richlv: 49863
-    10. johnclary_axtbuildings: 48227
+
+    patisilva_atxbuildings: 2741983
+    ccjjmartin_atxbuildings: 1300396
+    ccjjmartin__atxbuildings: 939996
+    wilsaj_atxbuildings: 358749
+    jseppi_atxbuildings: 300796
+    woodpeck_fixbot: 220495
+    kkt_atxbuildings: 157843
+    lyzidiamond_atxbuildings: 156355
+    richlv: 49863
+    johnclary_axtbuildings: 48227
 
 - Note that #2 and #3 are likely the same user.
 
@@ -213,17 +212,17 @@ sqlite> SELECT b.user, COUNT(*) as num
 
 **Number of contributors with "atxbuildings" in their username**
 - A lot of contributions come from users affiliated with "atxbuildings". Let's find out how many there are and the number of contributions they've made.
-    1. patisilva_atxbuildings: 2741983
-    2. ccjjmartin_atxbuildings: 1300396
-    3. ccjjmartin__atxbuildings: 939996
-    4. wilsaj_atxbuildings: 358749
-    5. jseppi_atxbuildings: 300796
-    6. kkt_atxbuildings: 157843
-    7. lyzidiamond_atxbuildings: 156355
-    8. Omnific_atxbuildings: 15649
-    9. Jonathan Pa_atxbuildings: 9932
-<br>
-<br>
+
+        1. patisilva_atxbuildings: 2741983
+        2. ccjjmartin_atxbuildings: 1300396
+        3. ccjjmartin__atxbuildings: 939996
+        4. wilsaj_atxbuildings: 358749
+        5. jseppi_atxbuildings: 300796
+        6. kkt_atxbuildings: 157843
+        7. lyzidiamond_atxbuildings: 156355
+        8. Omnific_atxbuildings: 15649
+        9. Jonathan Pa_atxbuildings: 9932
+
 - Note that #10 from the "Top ten contributors" does not appear in this list, despite being affilitated with atxbuildings. This is no doubt due to the typo in his username (do you see it?) and my query's inflexibility.
 
 
@@ -241,6 +240,7 @@ sqlite> SELECT b.user, COUNT(*) as Num
 ### Additional Queries
 
 ** Ten most common amenities:**
+
     1. restaurant: 646
     2. waste_basket: 603
     3. place_of_worship: 424
@@ -266,6 +266,7 @@ sqlite> SELECT value, COUNT(*) as Num
 ```
 
 ** Ten most common cuisines:**
+
     1. mexican: 61
     2. pizza: 31
     3. american: 29
