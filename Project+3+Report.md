@@ -20,7 +20,6 @@ I have recently relocated to Austin, TX. This project will help me get to know t
 - I began my audit by getting an overview of the tags present in the sample (count_tags.py), their parent-child structure (find\_children\_of\_tags.py), as well as what kind of attributes are tagged using "tag" elements (kattributes\_by\_feature.py).
 <br>
     - The tags and their parent-child structure were exactly what I expected, having read the OpenStreetMap documentation. So, that was good.
-    <br>
     - From examining the k-attributes of various features, I identified two types of data that would probably benefit from a closer audit-- specifically, street names and phone numbers-- since the formatting of those tend to vary.
     - Many nodes and ways were seemingly created by GPS units, as indicated by tag keys prefixed with "tiger:..." or "gnis:...". This could be problematic as it requires users to consider special cases when making queries related to geotagged data.
         - E.g., k = 'tiger:county'
@@ -39,7 +38,6 @@ I have recently relocated to Austin, TX. This project will help me get to know t
     - creating a mapping from the abbreviations to the words they abbreviate-- e.g., "cv" --> "Cove"; and
     - using the function, below, to programmatically update the street types in the street names in my dataset.
         - E.g., "Applegate Dr. East" --> "Applegate Drive East"
-
 
 ```python
 mapping = { "st": "Street",
@@ -117,7 +115,6 @@ def update_phone_number(phone_number):
 
 
 ```SQL
-'''
 sqlite> CREATE TABLE relations (
         id INTEGER PRIMARY KEY NOT NULL,
         changeset INTEGER,
@@ -148,7 +145,6 @@ sqlite> CREATE TABLE relation_tags (
         type TEXT,
         FOREIGN KEY (id) REFERENCES relations (id)
         );
-'''
 ```
 
 #### Overview Statistics
@@ -174,24 +170,20 @@ Below are some summary statistics of the data contained in austin_tx_osm.db and,
 - relations: 2405
 
 ```python
-'''
 sqlite> SELECT COUNT(*) FROM nodes;
 
 sqlite> SELECT COUNT(*) FROM ways;
 
 sqlite> SELECT COUNT(*) FROM relations;
-'''
 ```
 
 **Number of unique contributors:** 1380
 
 ```python
-'''
 sqlite> SELECT COUNT(DISTINCT(b.uid))
         FROM (SELECT uid FROM nodes UNION ALL
         SELECT uid FROM ways UNION ALL
         SELECT uid FROM relations) AS b;
-'''
 ```
 
 **Top ten contributors and number of contributions**:
@@ -208,9 +200,7 @@ sqlite> SELECT COUNT(DISTINCT(b.uid))
 
 - Note that #2 and #3 are likely the same user.
 
-
 ```python
-'''
 sqlite> SELECT b.user, COUNT(*) as num
         FROM (SELECT user FROM nodes UNION ALL
         SELECT user FROM ways UNION ALL
@@ -219,7 +209,6 @@ sqlite> SELECT b.user, COUNT(*) as num
         ORDER BY num
         DESC
         LIMIT 10;
-'''
 ```
 
 **Number of contributors with "atxbuildings" in their username**
@@ -239,7 +228,6 @@ sqlite> SELECT b.user, COUNT(*) as num
 
 
 ```python
-'''
 sqlite> SELECT b.user, COUNT(*) as Num
         FROM (SELECT user FROM nodes UNION ALL
         SELECT user FROM ways UNION ALL
@@ -248,7 +236,6 @@ sqlite> SELECT b.user, COUNT(*) as Num
         GROUP BY b.user
         ORDER BY Num
         DESC;
-'''
 ```
 
 ### Additional Queries
@@ -269,7 +256,6 @@ sqlite> SELECT b.user, COUNT(*) as Num
 
 
 ```python
-'''
 sqlite> SELECT value, COUNT(*) as Num
         FROM nodes_tags
         WHERE key = "amenity"
@@ -277,7 +263,6 @@ sqlite> SELECT value, COUNT(*) as Num
         ORDER BY Num
         DESC
         LIMIT 10;
-'''
 ```
 
 ** Ten most common cuisines:**
@@ -294,7 +279,6 @@ sqlite> SELECT value, COUNT(*) as Num
 
 
 ```python
-'''
 sqlite> SELECT a.value, COUNT(*) as num
         FROM nodes_tags AS a, nodes_tags AS b
         WHERE a.id = b.id
@@ -305,7 +289,6 @@ sqlite> SELECT a.value, COUNT(*) as num
         ORDER BY num
         DESC
         LIMIT 10;
-'''
 ```
 
 ### Section - 3 Suggestions for Improvement
@@ -321,14 +304,12 @@ sqlite> SELECT a.value, COUNT(*) as num
 
 
 ```python
-'''
 sqlite> SELECT LENGTH(value) as 'Postal Code Length', COUNT(*) as Count
         FROM nodes_tags
         WHERE nodes_tags.key = "addr:postcode"
         GROUP BY 'Postal Code Length'
         ORDER BY 'Postal Code Length'
         DESC;
-'''
 ```
 
 #### Replace "tiger: ..." and "gnis: ..." keys with additional tags
