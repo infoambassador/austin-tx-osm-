@@ -1,7 +1,7 @@
 
 # OpenStreetMap Data Case Study
 
-### $\S$0 - Map Area
+### Section 0 - Map Area
 
 #### Austin, TX, United States
 
@@ -9,7 +9,7 @@
 
 I have recently relocated to Austin, TX. This project will help me get to know the city better-- by way of database queries!-- and create an opportunity for me to support the local mapping scene.
 
-### $\S$1 - Auditing the OSM Data
+### Section 1 - Auditing the OSM Data
 
 #### Cursory Audit
 - I downloaded a pre-processed "metro extract" from Map Zen (1.42GB, unzipped) at the link below, and used a script (create\_sample.py) to create a smaller file (14.3MB) containing a systematic sample of the xml content.
@@ -61,7 +61,6 @@ def update_street_name(name, mapping):
             name = ' '.join(name_list)
     return name
 ```
-
 - Addressing the omitted street names proved more difficult, as there are an abundance of addresses in the Austin area that, properly, have no street type in their address. 
     - E.g., "404 Explorer, Lakeway, TX 78734". 
     - One would need a **gold standard** data source to know which addresses were missing street types. While I don't have *legitimate* access to such a data source, this is discussed further in the "Suggested Improvements" section.
@@ -80,8 +79,6 @@ def update_street_name(name, mapping):
     - E.g., '+1 (555) 555, 5555' --> (555) 555 - 5555
     - This fix ignores non-US numbers, as well as more egregious formatting issues; but, I didn't have any of those in my dataset.
    
-
-
 ```python
 # Reg exp for extracting country, area, prefix, line
 con = r'[\D|\s]*'                  # Various connectors and spaces 
@@ -108,7 +105,7 @@ def update_phone_number(phone_number):
     return phone_number
 ```
 
-### $\S 2$ - The SQL Database: austin_tx_osm.db
+### Section 2 - The SQL Database: austin_tx_osm.db
 
 #### Constructing the SQL database
 - Having audited the data and developed the cleaning plan above, I cleaned and imported the data into an SQLite database using the recommended schema for the nodes, node_tags, ways, ways_nodes, and ways_tags tables.
@@ -119,7 +116,7 @@ def update_phone_number(phone_number):
     - I found a resolution for this in the Udacity forums, where it was suggested that member tags be divided across two tables: relation_nodes and relation_ways. (See: https://discussions.udacity.com/t/foreign-key-reference-to-multiple-tables/193289) This worked perfectly.
 
 
-```python
+```SQL
 '''
 sqlite> CREATE TABLE relations (
         id INTEGER PRIMARY KEY NOT NULL,
@@ -176,7 +173,6 @@ Below are some summary statistics of the data contained in austin_tx_osm.db and,
 - ways: 670811
 - relations: 2405
 
-
 ```python
 '''
 sqlite> SELECT COUNT(*) FROM nodes;
@@ -188,7 +184,6 @@ sqlite> SELECT COUNT(*) FROM relations;
 ```
 
 **Number of unique contributors:** 1380
-
 
 ```python
 '''
@@ -313,7 +308,7 @@ sqlite> SELECT a.value, COUNT(*) as num
 '''
 ```
 
-### $\S$ - 3 Suggestions for Improvement
+### Section - 3 Suggestions for Improvement
 
 #### Validating street addresses
 - Distinguishing street names that properly possess no street type from street names wherein the type has been erroneously omitted is difficult to programmatically correct without access to a **gold standard** library of Austin addresses. The United States Postal Service provides access to such a database through the *Address Verification API*. It would be easy to write a script to query this web service to validate and clean addresses in the Austin, TX, OSM data.
