@@ -15,10 +15,9 @@ I have recently relocated to Austin, TX. This project will help me get to know t
 - I downloaded a pre-processed "metro extract" from Map Zen (1.42GB, unzipped) at the link below, and used a script (create\_sample.py) to create a smaller file (14.3MB) containing a systematic sample of the xml content.
 
     - (https://mapzen.com/data/metro-extracts/metro/austin_texas/)
-<br>
-<br>
+
 - I began my audit by getting an overview of the tags present in the sample (count_tags.py), their parent-child structure (find\_children\_of\_tags.py), as well as what kind of attributes are tagged using "tag" elements (kattributes\_by\_feature.py).
-<br>
+
     - The tags and their parent-child structure were exactly what I expected, having read the OpenStreetMap documentation. So, that was good.
     - From examining the k-attributes of various features, I identified two types of data that would probably benefit from a closer audit-- specifically, street names and phone numbers-- since the formatting of those tend to vary.
     - Many nodes and ways were seemingly created by GPS units, as indicated by tag keys prefixed with "tiger:..." or "gnis:...". This could be problematic as it requires users to consider special cases when making queries related to geotagged data.
@@ -317,5 +316,5 @@ sqlite> SELECT LENGTH(value) as 'Postal Code Length', COUNT(*) as Count
 - The use of GPS prefixes in k-attributes could be addressed by programmatically removing the prefix from the k-attribute and adding an additional tag with k='GPS' and v='tiger' (or some equivalent).
     - This would alleviate the need for considering special cases when making queries related to geotagged data, while preserving the information inherent in the prefixes.
 
-### $\S$ - 4 Conclusion
+### Section - 4 Conclusion
 - The Austin, TX, OSM data is an excellent start to mapping the features of the Austin Metropolitan Area. There is clearly a very active community contributing to this project. Further, a minimally funded non-profit could make vast extensions and improvements to the data, which bodes for the future of this project. Together, these facts bode well for the future of the project.
