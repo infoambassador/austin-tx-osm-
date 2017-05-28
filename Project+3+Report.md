@@ -67,11 +67,9 @@ def update_street_name(name, mapping):
     - '[() -]' coincides with '(555) 555-5555'
     - '[ ...]' coincides with '1 555.555.5555'
     - '[ () , ]' concides with '+1 (555) 555, 5555'
-<br>
-<br>
+
 - As I expected, the phone numbers in my data set had a variety of different formats (and, therefore, different format strings), which I regarded as another **problem** with data consistency. Also, a single field-- noteably, in the ENTIRE Austin metropolitan area-- had multiple phone numbers, separated by a semi-colon.
-<br>
-<br>
+
 - Employing regular expressions that captured the individual parts of the number, I built and applied the function below to create a uniform format for all of the phone numbers in my dataset.
     - E.g., '+1 (555) 555, 5555' --> (555) 555 - 5555
     - This fix ignores non-US numbers, as well as more egregious formatting issues; but, I didn't have any of those in my dataset.
@@ -152,22 +150,24 @@ sqlite> CREATE TABLE relation_tags (
 Below are some summary statistics of the data contained in austin_tx_osm.db and, where applicable, the SQL queries used to obtain them.
 
 **File sizes:**
-    - austin_texas.osm .............. 1420 MB
-    - austin_tx_osm.db .............. 810.9 MB
-    - nodes.csv ..................... 601.7 MB
-    - node_tags.csv ................. 13.6 MB
-    - ways.csv ...................... 48.2 MB
-    - ways_tags.csv ................. 75.4 MB
-    - ways_nodes.csv ................ 169.9 MB
-    - relations.csv ................. 0.148 MB
-    - relations_tags.csv ............ 0.494 MB
-    - relations_nodes.csv ........... 0.098 MB
-    - relations_ways.csv ............ 0.285 MB
+
+    austin_texas.osm .............. 1420 MB
+    austin_tx_osm.db .............. 810.9 MB
+    nodes.csv ..................... 601.7 MB
+    node_tags.csv ................. 13.6 MB
+    ways.csv ...................... 48.2 MB
+    ways_tags.csv ................. 75.4 MB
+    ways_nodes.csv ................ 169.9 MB
+    relations.csv ................. 0.148 MB
+    relations_tags.csv ............ 0.494 MB
+    relations_nodes.csv ........... 0.098 MB
+    relations_ways.csv ............ 0.285 MB
 
 **Number of nodes, ways, and relations:**
-- nodes: 6400526
-- ways: 670811
-- relations: 2405
+    
+    nodes: 6400526
+    ways: 670811
+    relations: 2405
 
 ```SQL
 sqlite> SELECT COUNT(*) FROM nodes;
