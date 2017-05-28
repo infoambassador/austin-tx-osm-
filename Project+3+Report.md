@@ -106,10 +106,11 @@ def update_phone_number(phone_number):
 
 #### Constructing the SQL database
 - Having audited the data and developed the cleaning plan above, I cleaned and imported the data into an SQLite database using the recommended schema for the nodes, node_tags, ways, ways_nodes, and ways_tags tables.
-<br>
-<br>
+
 - Additionally, I created four new tables (see SQL commands, below) to handle the relations tags, which posed the following challenge:
+
     - *Member* tags, which are children of *relations*, contain a "ref" field which refers to the id of some node or way. Since this single field acts as a foreign key to two different objects-- which are represented by different tables in my schema-- this field cannot have a foreign key constraint in a SQL database. (See: https://stackoverflow.com/questions/7844460/foreign-key-to-multiple-tables) This is disappointing, since references to the nodes and ways comprising a relation are the very content of that relation.
+    
     - I found a resolution for this in the Udacity forums, where it was suggested that member tags be divided across two tables: relation_nodes and relation_ways. (See: https://discussions.udacity.com/t/foreign-key-reference-to-multiple-tables/193289) This worked perfectly.
 
 
@@ -168,7 +169,7 @@ Below are some summary statistics of the data contained in austin_tx_osm.db and,
 - ways: 670811
 - relations: 2405
 
-```python
+```SQL
 sqlite> SELECT COUNT(*) FROM nodes;
 
 sqlite> SELECT COUNT(*) FROM ways;
@@ -178,7 +179,7 @@ sqlite> SELECT COUNT(*) FROM relations;
 
 **Number of unique contributors:** 1380
 
-```python
+```SQL
 sqlite> SELECT COUNT(DISTINCT(b.uid))
         FROM (SELECT uid FROM nodes UNION ALL
         SELECT uid FROM ways UNION ALL
@@ -199,7 +200,7 @@ sqlite> SELECT COUNT(DISTINCT(b.uid))
 
 - Note that #2 and #3 are likely the same user.
 
-```python
+```SQL
 sqlite> SELECT b.user, COUNT(*) as num
         FROM (SELECT user FROM nodes UNION ALL
         SELECT user FROM ways UNION ALL
@@ -226,7 +227,7 @@ sqlite> SELECT b.user, COUNT(*) as num
 - Note that #10 from the "Top ten contributors" does not appear in this list, despite being affilitated with atxbuildings. This is no doubt due to the typo in his username (do you see it?) and my query's inflexibility.
 
 
-```python
+```SQL
 sqlite> SELECT b.user, COUNT(*) as Num
         FROM (SELECT user FROM nodes UNION ALL
         SELECT user FROM ways UNION ALL
@@ -254,7 +255,7 @@ sqlite> SELECT b.user, COUNT(*) as Num
 - Let's take a moment to appreciate that 603 wastebaskets in the Austin, TX, metropolitan area have been lovingly tagged by users...
 
 
-```python
+```SQL
 sqlite> SELECT value, COUNT(*) as Num
         FROM nodes_tags
         WHERE key = "amenity"
@@ -277,7 +278,7 @@ sqlite> SELECT value, COUNT(*) as Num
     10. burger: 12
 
 
-```python
+```SQL
 sqlite> SELECT a.value, COUNT(*) as num
         FROM nodes_tags AS a, nodes_tags AS b
         WHERE a.id = b.id
@@ -302,7 +303,7 @@ sqlite> SELECT a.value, COUNT(*) as num
 - The same address verification information described above could be used to extend the postal codes found in the database from the five digit version to the nine digit version. As the results of the following query show, all 81322 of the postal codes in the database employ the (less accurate) five digit versions.
 
 
-```python
+```SQL
 sqlite> SELECT LENGTH(value) as 'Postal Code Length', COUNT(*) as Count
         FROM nodes_tags
         WHERE nodes_tags.key = "addr:postcode"
