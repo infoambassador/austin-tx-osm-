@@ -12,7 +12,7 @@ I have recently relocated to Austin, TX. This project will help me get to know t
 ### Section 1 - Auditing the OSM Data
 
 #### Cursory Audit
-- I downloaded a pre-processed "metro extract" from Map Zen (1.42GB, unzipped) at the link below, and used a script (create\_sample.py) to create a smaller file (14.3MB) containing a systematic sample of the xml content.
+- I downloaded a pre-processed "metro extract" from Map Zen (1.42GB, unzipped) at the link below, and used a script (create\_sample.py) to create a smaller file (9.3MB) containing a systematic sample of the xml content.
 
     - (https://mapzen.com/data/metro-extracts/metro/austin_texas/)
 

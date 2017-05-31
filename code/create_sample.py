@@ -4,10 +4,12 @@
 
 import xml.etree.cElementTree as ET  
 
-OSM_FILE = "austin_texas.osm"  	# Austin, TX metro extract
+OSM_FILE_PATH ="/"
+OSM_FILE = OSM_FILE_PATH+"austin_texas.osm"  	# Austin, TX metro extract
+SAMPLE_PATH = "/"
 SAMPLE_FILE = "sample.osm" 		# Sample file
 
-k = 100 # Parameter: take every k-th top level element
+k = 150 # Parameter: take every k-th top level element, tuned to produce < 10MB file
 
 def get_element(osm_file, tags=('node', 'way', 'relation')):
     """Yield element if it is the right type of tag
@@ -40,5 +42,5 @@ def create_sample(osm_file,sample_file):
     pass
     
 if __name__ == '__main__':
-    create_sample(OSM_FILE,SAMPLE_FILE)
+    create_sample(PATH+OSM_FILE,SAMPLE_FILE)
     print('Sample created in {}.'.format(SAMPLE_FILE))
