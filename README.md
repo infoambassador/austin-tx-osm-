@@ -6,6 +6,7 @@
 
 - Link to Austin, TX, relation on OpenStreetMap: http://www.openstreetmap.org/relation/113314
 - Link to metro extract download on MapZen: https://mapzen.com/data/metro-extracts/metro/austin_texas/
+- See Project+3+Report.md for a more thorough overview of the process.
 
 ## Process Overview (by way of scripts)
 
