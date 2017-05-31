@@ -63,7 +63,7 @@ def update_street_name(name, mapping):
 #### Auditing Phone Numbers
 - I used a script (audit_phone_formats.py) to profile the phone numbers in my dataset according to their formatting. In particular, I used regular expressions to extract the formatting between the number blocks, which I then encoded as a string. From these strings, I built a dictionary of key:value pairs in which the keys were "format strings" and the values were sets of numbers in my datasets coinciding with a particular "format string." E.g., 
     - '[() -]' coincides with '(555) 555-5555'
-    - '[ ...]' coincides with '1 555.555.5555'
+    - '[ ..]' coincides with '1 555.555.5555'
     - '[ () , ]' concides with '+1 (555) 555, 5555'
 
 - As I expected, the phone numbers in my data set had a variety of different formats (and, therefore, different format strings), which I regarded as another **problem** with data consistency. Also, a single field-- noteably, in the ENTIRE Austin metropolitan area-- had multiple phone numbers, separated by a semi-colon.
