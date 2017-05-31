@@ -11,6 +11,7 @@
 
 1. create_sample.py
    - Systematically samples an XML file (with a tunable parameter, k) and writes a new XML file.
+   - See *sample.osm* for an example of what create_sample.py creates.
 2. count_tags.py
    - Iteratively parses an XML file and stores the top-level XML tags and their counts as key-value pairs in a dictionary.
 3. find_children_and_tags.py
@@ -33,7 +34,7 @@ def update_street_name(name, mapping):
 ```
 6. audit_phone_formats.py
    - Iteravely parses an XML file of OSM data and creates dictionary of telephone number "formatting strings" and sets of phone numbers coinciding with that formatting string. "Formatting strings" are the set of characters (including whitespace) between blocks of digits in a telephone. E.g., (555) 555- 5555 would have the phone formatting string '[() - ]'.
-   - Includes a function called update_phone_number (code below) that extracts the blocks of digits from a phone number and returns a phone number with the formatting (555) 555 - 5555.
+   - Includes a function called update_phone_number (code below) that employs regular expressions to extract the blocks of digits from a phone number and return a phone number with the formatting (555) 555 - 5555.
 
 ```python
 # Reg exp for extracting country, area, prefix, line                                                                           
