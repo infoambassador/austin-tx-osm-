@@ -184,7 +184,7 @@ sqlite> SELECT COUNT(DISTINCT(b.uid))
         SELECT uid FROM relations) AS b;
 ```
 
-**Top ten contributors and number of contributions**:
+**Top ten contributors and number of contributions:**
 
     patisilva_atxbuildings: 2741983
     ccjjmartin_atxbuildings: 1300396
@@ -239,18 +239,18 @@ sqlite> SELECT b.user, COUNT(*) as Num
 
 ### Additional Queries
 
-** Ten most common amenities:**
+**Ten most common amenities:**
 
-    1. restaurant: 646
-    2. waste_basket: 603
-    3. place_of_worship: 424
-    4. fast_food: 384
-    5. bench: 364
-    6. fuel: 237
-    7. school: 217
-    8. bar: 133
-    9. cafe: 123
-    10. pharmacy: 90
+    restaurant: 646
+    waste_basket: 603
+    place_of_worship: 424
+    fast_food: 384
+    bench: 364
+    fuel: 237
+    school: 217
+    bar: 133
+    cafe: 123
+    pharmacy: 90
 
 - Let's take a moment to appreciate that 603 wastebaskets in the Austin, TX, metropolitan area have been lovingly tagged by users...
 
@@ -265,18 +265,18 @@ sqlite> SELECT value, COUNT(*) as Num
         LIMIT 10;
 ```
 
-** Ten most common cuisines:**
+**Ten most common cuisines:**
 
-    1. mexican: 61
-    2. pizza: 31
-    3. american: 29
-    4. chinese: 21
-    5. italian: 17
-    6. indian: 15
-    7. asian: 14
-    8. thai: 14
-    9. sandwich: 13
-    10. burger: 12
+    mexican: 61
+    pizza: 31
+    american: 29
+    chinese: 21
+    italian: 17
+    indian: 15
+    asian: 14
+    thai: 14
+    sandwich: 13
+    burger: 12
 
 
 ```SQL
@@ -319,4 +319,4 @@ sqlite> SELECT LENGTH(value) as 'Postal Code Length', COUNT(*) as Count
     - This would alleviate the need for considering special cases when making queries related to geotagged data, while preserving the information inherent in the prefixes.
 
 ### Section - 4 Conclusion
-- The Austin, TX, OSM data is an excellent start to mapping the features of the Austin Metropolitan Area. There is clearly a very active community contributing to this project. Further, a minimally funded non-profit could make vast extensions and improvements to the data, which bodes for the future of this project. Together, these facts bode well for the future of the project.
+- The Austin, TX, OSM data is an excellent start to mapping the features of the Austin Metropolitan Area. There is clearly a very active community contributing to this project. Further, a minimally funded non-profit could make vast extensions and improvements to the data, which bodes well for the future of this project.
