@@ -89,23 +89,6 @@ def update_phone_number(phone_number):
     
     - I found a resolution for this in the Udacity forums, where it was suggested that member tags be divided across two tables: relation_nodes and relation_ways. (See: https://discussions.udacity.com/t/foreign-key-reference-to-multiple-tables/193289) This worked perfectly.
 
-```SQL
-
-sqlite> CREATE TABLE relation_nodes (
-        id INTEGER NOT NULL,
-        node_id INTEGER NOT NULL,
-        FOREIGN KEY (id) REFERENCES relations (id),
-        FOREIGN KEY (node_id) REFERENCES nodes (id)
-        );
-
-sqlite> CREATE TABLE relation_ways (
-        id INTEGER NOT NULL,
-        way_id INTEGER NOT NULL,
-        FOREIGN KEY (id) REFERENCES relations (id),
-        FOREIGN KEY (node_id) REFERENCES nodes (id),
-        );
-```
-
 #### Overview Statistics
 
 Below are some summary statistics of the data contained in austin_tx_osm.db and, where applicable, the SQL queries used to obtain them.
