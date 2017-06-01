@@ -33,29 +33,9 @@ I have recently relocated to Austin, TX. This project will help me get to know t
 - I addressed the inconsistent abbreviations by:
     - creating a list of common abbreviations and the particular abbreviations present in my sample file;
     - creating a mapping from the abbreviations to the words they abbreviate-- e.g., "cv" --> "Cove"; and
-    - using the function, below, to programmatically update the street types in the street names in my dataset.
+    - used a cleaning function to programmatically update the street types in the street names in my dataset.
         - E.g., "Applegate Dr. East" --> "Applegate Drive East"
-
-```python
-mapping = { "st": "Street",
-            "ave": "Avenue",
-            "rd": "Avenue",
-            "ln": "Lane",
-            "ct": "Court",
-            "cv": "Cove",
-            "dr": "Drive",
-            "pl": "Place",
-            "trl": "Trail"}
-
-def update_street_name(name, mapping):
-    name_list = name.split(' ')
-    for i,word in enumerate(name_list):
-        word = word.split('.')[0].lower() # Remove periods; set lowercase
-        if word in mapping:
-            name_list[i] = mapping[word]
-            name = ' '.join(name_list)
-    return name
-```
+        
 - Addressing the omitted street names proved more difficult, as there are an abundance of addresses in the Austin area that, properly, have no street type in their address. 
     - E.g., "404 Explorer, Lakeway, TX 78734". 
     - One would need a **gold standard** data source to know which addresses were missing street types. While I don't have *legitimate* access to such a data source, this is discussed further in the "Suggested Improvements" section.
@@ -103,22 +83,13 @@ def update_phone_number(phone_number):
 #### Constructing the SQL database
 - Having audited the data and developed the cleaning plan above, I cleaned and imported the data into an SQLite database using the recommended schema for the nodes, node_tags, ways, ways_nodes, and ways_tags tables.
 
-- Additionally, I created four new tables (see SQL commands, below) to handle the relations tags, which posed the following challenge:
+- Additionally, I created four new tables to handle the relations tags, which posed the following challenge:
 
     - *Member* tags, which are children of *relations*, contain a "ref" field which refers to the id of some node or way. Since this single field acts as a foreign key to two different objects-- which are represented by different tables in my schema-- this field cannot have a foreign key constraint in a SQL database. (See: https://stackoverflow.com/questions/7844460/foreign-key-to-multiple-tables) This is disappointing, since references to the nodes and ways comprising a relation are the very content of that relation.
     
     - I found a resolution for this in the Udacity forums, where it was suggested that member tags be divided across two tables: relation_nodes and relation_ways. (See: https://discussions.udacity.com/t/foreign-key-reference-to-multiple-tables/193289) This worked perfectly.
 
-
 ```SQL
-sqlite> CREATE TABLE relations (
-        id INTEGER PRIMARY KEY NOT NULL,
-        changeset INTEGER,
-        timestamp TEXT,
-        uid INTEGER,
-        user TEXT,
-        version integer
-        );
 
 sqlite> CREATE TABLE relation_nodes (
         id INTEGER NOT NULL,
@@ -132,14 +103,6 @@ sqlite> CREATE TABLE relation_ways (
         way_id INTEGER NOT NULL,
         FOREIGN KEY (id) REFERENCES relations (id),
         FOREIGN KEY (node_id) REFERENCES nodes (id),
-        );
-    
-sqlite> CREATE TABLE relation_tags (
-        id INTEGER,
-        key TEXT,
-        value TEXT,
-        type TEXT,
-        FOREIGN KEY (id) REFERENCES relations (id)
         );
 ```
 
